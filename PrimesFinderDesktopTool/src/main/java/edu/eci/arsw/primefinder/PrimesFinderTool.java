@@ -16,39 +16,67 @@ public class PrimesFinderTool {
 
 	public static void main(String[] args) {
 
-
+        boolean t=true;
         int maxPrim=1000;
 
         PrimesResultSet prs=new PrimesResultSet("john");
-        ControllerPrimeFinder controlador  = new ControllerPrimeFinder(new BigInteger("1"), new BigInteger("10000"), prs,new BigInteger("4"));
+        ControllerPrimeFinder controlador  = new ControllerPrimeFinder(new BigInteger("1"), new BigInteger("100"), prs,new BigInteger("4"));
 
 
         System.out.println("Prime numbers found:");
 
         System.out.println(prs.getPrimes());
-            
-            /*while(task_not_finished){
-                try {
-                    //check every 10ms if the idle status (10 seconds without mouse
-                    //activity) was reached. 
-                    Thread.sleep(10);
-                    if (MouseMovementMonitor.getInstance().getTimeSinceLastMouseMovement()>10000){
-                        System.out.println("Idle CPU ");
+
+        while(t) {
+            try {
+                t = false;
+                //check every 10ms if the idle status (10 seconds without mouse
+                //activity) was reached.
+                Thread.sleep(10);
+                if (MouseMovementMonitor.getInstance().getTimeSinceLastMouseMovement() > 10000) {
+                    System.out.println("Stoped");
+                    System.out.println("Primes found: " + Integer.toString(prs.getPrimes().size()));
+                    System.out.println("Prime numbers found:");
+                    System.out.println(prs.getPrimes());
+                    for (PrimeFinder p : controlador.hilosList) {
+                        p.sleep();
                     }
-                    else{
-                        System.out.println("User working again!");
+
+                } else {
+                    //System.out.println("Working...");
+                    for (PrimeFinder p : controlador.hilosList) {
+                        p.wakeUp();
                     }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(PrimesFinderTool.class.getName()).log(Level.SEVERE, null, ex);
+
+
                 }
-            }*/
+
+                for (PrimeFinder p : controlador.hilosList) {
+                    if (p.isAlive()) {
+                        t = true;
+                        break;
+                    }
+
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PrimesFinderTool.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println("Task Finished...");
+        System.out.println("Primes found: "+Integer.toString(prs.getPrimes().size()));
+        System.out.println("Primes Found:");
+        System.out.println(prs.getPrimes());
+        System.exit(-1);
+
+
+    }
                         
             
             
             
             
-	}
-	
 }
+	
+
 
 
