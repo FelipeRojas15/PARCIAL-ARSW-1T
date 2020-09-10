@@ -20,7 +20,7 @@ public class PrimesFinderTool {
         int maxPrim=1000;
 
         PrimesResultSet prs=new PrimesResultSet("john");
-        ControllerPrimeFinder controlador  = new ControllerPrimeFinder(new BigInteger("1"), new BigInteger("100"), prs,new BigInteger("4"));
+        ControllerPrimeFinder controlador  = new ControllerPrimeFinder(new BigInteger("1"), new BigInteger("10000"), prs,new BigInteger("4"));
 
 
         System.out.println("Prime numbers found:");
