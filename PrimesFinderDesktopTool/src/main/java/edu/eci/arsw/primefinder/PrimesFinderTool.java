@@ -15,17 +15,17 @@ import org.apache.http.impl.client.HttpClientBuilder;
 public class PrimesFinderTool {
 
 	public static void main(String[] args) {
-		            
-            int maxPrim=1000;
-            
-            PrimesResultSet prs=new PrimesResultSet("john");
-            
-            PrimeFinder.findPrimes(new BigInteger("1"), new BigInteger("10000"), prs);
-            
-            System.out.println("Prime numbers found:");
-            
-            System.out.println(prs.getPrimes());
-            
+
+
+        int maxPrim=1000;
+
+        PrimesResultSet prs=new PrimesResultSet("john");
+        ControllerPrimeFinder controlador  = new ControllerPrimeFinder(new BigInteger("1"), new BigInteger("10000"), prs,new BigInteger("4"));
+
+
+        System.out.println("Prime numbers found:");
+
+        System.out.println(prs.getPrimes());
             
             /*while(task_not_finished){
                 try {
